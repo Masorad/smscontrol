@@ -30,11 +30,13 @@ def send_sms(recipient, sms_text, t_login, t_pass):
     d.get("http://www.t-mobile.cz")
 
     try:
-        iframe = d.find_element_by_xpath("//iframe[@class='gdpr-iframe']")
+        iframe = d.find_element(By.XPATH, "//iframe[@class='gdpr-iframe']")
         d.switch_to.frame(iframe)
         accept_button = wait_for_element(d, By.ID, "acceptAllQuick")
         accept_button.click()
         d.switch_to.default_content()
+        
+        time.sleep(10)
     except:
         pass
 
@@ -54,7 +56,7 @@ def send_sms(recipient, sms_text, t_login, t_pass):
         password.send_keys(t_pass)
         password.send_keys(Keys.ENTER)
 
-        time.sleep(5)
+        time.sleep(10)
 
         send_sms = wait_for_element(d, By.XPATH, '//i[@class="ico-sms no-svg-ico"]')
         send_sms.click()
